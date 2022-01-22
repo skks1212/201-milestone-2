@@ -134,58 +134,26 @@ $ python tasks.py runserver # Starts the tasks management server"""
     def render_pending_tasks(self):
         # Complete this method to return all incomplete tasks as HTML
         outPut = self.getStyle()
-        outPut += '<div class="t-wrap"><h1>Pending Tasks:</h1><ol>'
+        outPut += '<div class="t-wrap flex items-center justify-center flex-col font-sans p-8 h-screen"><h1 class="font-black text-3xl mb-8">Pending Tasks:</h1><ol class="list-decimal">'
         for task in self.current_items:
             outPut += f'<li class="t-ls">{self.current_items[task]} [{task}]</li>'
-        outPut += '</ol><a href="completed">See Completed Tasks</button></a>'
+        outPut += '</ol><a href="completed" class="bg-blue-700 hover:bg-blue-800 rounded text-white px-5 py-3 mt-8">See Completed Tasks</a>'
         return outPut
 
     def render_completed_tasks(self):
         # Complete this method to return all completed tasks as HTML
         self.read_completed()
         outPut = self.getStyle()
-        outPut += '<div class="t-wrap"><h1>Completed Tasks:</h1><ol>'
+        outPut += '<div class="t-wrap flex items-center justify-center flex-col font-sans p-8 h-screen"><h1 class="font-black text-3xl mb-8">Completed Tasks:</h1><ol class="list-decimal">'
         i = 0
         for i in range(len(self.completed_items)):
             outPut += f'<li class="t-ls">{self.completed_items[i]}</li>'
-        outPut += '</ol><a href="tasks">See Incomplete Tasks</button></a>'
+        outPut += '</ol><a href="tasks" class="bg-blue-700 hover:bg-blue-800 rounded text-white px-5 py-3 mt-8">See Pending Tasks</a>'
         return outPut
 
     def getStyle(self) :
         return '''
-            <style>
-                html, body{
-                    margin:0px;
-                    padding:0px;
-                }
-                .t-wrap{
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    height:100vh;
-                    flex-direction:column;
-                }
-                ol{
-                    width:200px;
-                }
-                .t-ls{
-                    padding:10px;
-                    border-radius:10px;
-                }
-                a{
-                    padding:15px 40px;
-                    border-radius:8px;
-                    background:dodgerblue;
-                    border:0px;
-                    color:white;
-                    cursor:pointer;
-                    text-decoration:none;
-                    transition:0.2s;
-                }
-                a:hover{
-                    background:purple;
-                }
-            </style>
+            <script src="https://cdn.tailwindcss.com"></script>
         '''
 
 class TasksServer(TasksCommand, BaseHTTPRequestHandler):
